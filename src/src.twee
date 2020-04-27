@@ -1,0 +1,986 @@
+:: StoryTitle
+Happy little fishing game
+
+
+:: StoryData
+{
+	"ifid": "3B60EE67-DC97-4AF3-9A8C-40092D4AE9CE",
+	"format": "Harlowe",
+	"format-version": "3.1.0",
+	"start": "title page",
+	"zoom": 0.6
+}
+
+
+:: Story Stylesheet [stylesheet]
+@import url('https://fonts.googleapis.com/css?family=Seaweed+Script&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
+
+tw-story {
+	background: #eee url(https://rumorsmatrix.com/hlfg/dust_scratches.png);
+	color: #666 !important;
+  	font-family: "Inconsolata", monospace;
+	font-size: 16px;
+}
+
+tw-sidebar {
+  	display: none;
+}
+
+tw-passage {
+	transition-property: none;
+}
+
+tw-link {
+	color: #00f !important;
+}
+
+tw-link:hover {
+  	color: #00f !important;
+}
+
+strong {
+	font-family: 'Seaweed Script', cursive;
+	font-size: 32px;
+  	color: #222;
+  	font-weight: normal;
+  	word-spacing: 0.3em;
+	line-height: 150%;
+}
+
+.btn tw-link {
+  	border: 1px solid #222;
+ 	border-radius: 4px;
+    color: #444 !important;
+  	background: #fff;
+  	padding: 0.5rem 1rem 0.5rem 1rem;
+  	margin: 0.5rem 1rem 0.5rem 0;
+  	display: inline-block;
+}
+
+.btn tw-link:hover {
+    color: #000 !important;
+    border: 1px solid #000;
+}
+
+.btn-disabled {
+  	border: 1px solid #888;
+ 	border-radius: 4px;
+    color: #666 !important;
+  	background: #d5d5d5;
+  	padding: 0.5rem 1rem 0.5rem 1rem;
+  	margin: 0.5rem 1rem 0.5rem 0;
+  	display: inline-block;
+}
+
+.btn-disabled:hover {
+    border: 1px solid #666;
+}
+
+img {
+  	width: 100%;
+  	border-radius: 4px;
+}
+
+small {
+  color: #888;
+  font-size: 14px !important;
+}
+
+small > tw-hook > tw-link,
+small > tw-hook > tw-link:hover {
+  color: #666 !important;
+}
+
+@media screen and (max-width: 600px) {
+	tw-story {
+		padding: 1rem 1rem 4rem 1rem !important;
+		font-size: 16px;
+	}
+}
+
+
+:: Story JavaScript [script]
+var metaTag = document.createElement('meta');
+metaTag.name = "viewport"
+metaTag.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+document.getElementsByTagName('head')[0].appendChild(metaTag);
+
+
+:: title page {"position":"100,100","size":"100,100"}
+<img src="https://images.unsplash.com/28/stick-and-stones.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80" style=" filter: grayscale(100%); margin-top: -80px;">
+
+**Happy little fishing game**
+This is a game about fish. It's about finding fish, catching fish, selling fish, eating fish, and being friends with fish. I hope it makes you happy. 
+
+(if: (saved-games:) contains "hlfg-default-j1")[<span class="btn">(link-reveal-goto: "Continue existing game", "begin")[(set: $load_game to 'hlfg-default-j1')(set: $save_game to '')]</span>] (if: (saved-games:) contains "hlfg-default-j1")[<span class="btn">[[Start a new game|begin - sure]]</span>](else:)[<span class="btn">[[Start a new game|begin]]</span>]
+
+
+**Features**
++ 16 different fish
++ 7 non-fish items, including 5 fishing poles
++ 4 fishing spots
++ 3 towns
++ 3 rudimentary travelling events
++ Skill level increases
+
+
+**Patch notes**
+<u>26 April 2020</u>: added Moonfall Bay, an elven city, with two new rods for sale and it's own fishing spot; 4 new fish; durability checks.
+
+<u>23 April 2020</u>: added two new fishing poles, a fishing pole shop, the chance for fish to escape while being reeled in, and a fishing log.
+
+
+**Credits**
+Written and coded by (link-reveal: "rumorsmatrix")[(open-url: "https://twitter.com/rumorsmatrix")], with thanks to [[all these wonderful people|Credits]]. Want to have your own fish appear in the game? (link-reveal: "Submit them with this form")[(open-url: "https://docs.google.com/forms/d/e/1FAIpQLScB06nRM11ijrBmlvE4hJguiwguCwEbBLFxhFCYcUmEf15HDw/viewform")]!
+
+Got some feeback? There's (link-reveal: "a r/twinegames thread for that")[(open-url: "https://www.reddit.com/r/twinegames/comments/cq7ump/feedback_requested_on_a_happy_little_fishing_game/")], or (link-reveal: "message me on Twitter")[(open-url: "https://twitter.com/rumorsmatrix")], I'd love to hear from a fellow fisher <3
+
+
+:: begin {"position":"400,100","size":"100,100"}
+{
+(set: $fish_stock to 
+	(dm: 
+		"Murky Hole", 
+			(a: "Old boot", 
+				"Murkeye chub", 
+				"Stuckmud lamprey",
+				"Common muckfish",
+				"Common muckfish",				
+				"Flat bottom mudfish",
+				"Siltfin",
+				"Flotsam and/or jetsam",
+				"Tangle of weeds",
+			),
+		"Crowliver Docks", 
+			(a: "Murkeye chub",
+				"Murkeye chub", 
+				"Stuckmud lamprey",
+				"Flat bottom mudfish",
+				"Flat bottom mudfish",
+				"Flotsam and/or jetsam",
+			),
+		"Sulphurous Springs", 
+			(a: "Ironscale snapper",
+				"Ironscale snapper",
+				"Ironscale snapper",
+				"Caustic jello",
+				"Caustic jello",
+				"Flotsam and/or jetsam",
+				"Flotsam and/or jetsam",
+				"Rainbow dwarfish",
+				"Copperpot daggerhead",
+				"Bronzebucket trout",
+			),
+		"Gossamer Lake",
+			(a: "Coy carp", 
+				"Mirror carp",
+				"Humble starpike",
+				"Humble starpike",
+			),
+	)
+)
+
+(set: $fish_base_value to (dm: 
+	"Old boot", 0.3,
+	"Tangle of weeds", 0.5,
+	"Common muckfish", 0.75,
+	"Murkeye chub", 2,
+	"Stuckmud lamprey", 3,
+	"Ironscale snapper", 2,
+	"Flat bottom mudfish", 3,
+	"Siltfin", 3,
+	"Caustic jello", 2,
+	"Flotsam and/or jetsam", 0.5,
+	"Rainbow dwarfish", 5,
+	"Copperpot daggerhead", 4,
+	"Bronzebucket trout", 3,
+	"Coy carp", 15,
+	"Mirror carp", 12,
+	"Humble starpike", 32,
+))
+
+(set: $fish_rarity_words to (a: 
+	'non-existant', 
+	'common', 
+	'uncommon', 
+	'lesser-spotted', 
+	'rare', 
+	'fabled'))
+(set: $fish_tastiness_words to (a: 
+	'inedible', 
+	'unpleasant', 
+	'passable', 
+	'appetizing', 
+	'exquisite', 
+	'ambrosial'))
+(set: $fish_attractiveness_words to (a: 
+	'not even a fish', 
+	'offensive', 
+	'displeasing', 
+	'charming', 
+	'beautiful', 
+	'transcendent'))
+(set: $fish_overall_words to (a: 
+	'terrible', 
+	'poor', 
+	'adequate', 
+	'good', 
+	'excellent', 
+	'legendary'))
+(set: $health_words to (a:
+	'debilitated',
+	'ailing',
+	'unsound',
+	'healthy',
+	'robust',
+	'flourishing',))
+(set: $skill_words to (a:
+	'unskilled',
+	'hobbyist',
+	'apprentice',
+	'journeyman',
+	'master',
+	'one-with-the-fish',))
+
+
+(set: $market_adjustment to (dm: 
+	"Crowliver", 1,
+	"Fort Ironscale", 1.1,
+	"Moonfall Bay", 2.4
+))
+
+
+(set: $health to 3)
+(set: $fishing_skill to 1)
+(set: $fishing_xp to 1)
+(set: $fishing_karma_level to 1)
+(set: $fishing_karma_xp to 1)
+(set: $fish_caught to 0)
+(set: $most_recent_catch to '')
+(set: $fish_log to (dm:))
+
+(set: $location to 'Crowliver')
+(set: $return to 'Town')
+
+(set: $item_inventory to (dm: 
+	'Copy of the Fishipedia', 1,
+))
+(set: $pole_inventory to (dm:
+	'Sentimental fishing pole', 1,
+))
+(set: $fish_inventory to (dm:))
+
+
+(set: $pole to 'Sentimental fishing pole')
+(set: $pole_skill to 1)
+(set: $pole_durability to 1)
+
+(set: $gills to 30)
+}Your adventure is about to begin. First, I just need to get everything set up for you...
+
+(event: when time > 0s)[Fixing snapped lines...]
+(event: when time > 1s)[Polishing fishing rod...]
+(event: when time > 2s)[Brushing fish scales...]
+(event: when time > 3s)[Fluffing clouds...]
+(event: when time > 4s)[Done!
+
+<span class="btn">(if: $load_game is 'hlfg-default-j1')[(load-game: $load_game)(set: $load_game to '')(set: $save_game to '')(link-goto: "Okay", $return)](else:)[(link-goto: "Okay", "Introduction")]</span>]
+
+
+:: Crowliver {"position":"100,1350","size":"200,100"}
+**Crowliver**
+You are in the not-so-salubrious port of Crowliver, a human settlement. Half bustling market, half pirate-soaked wharf, Crowliver is a lively if not always law-abiding kind of town.
+
+
+:: Town menu {"position":"1200,300","size":"100,100"}
+**Nearby fishing spots**
+Each fishing spot has a recommended skill level, rated out of five stars.
+
+(if: $location is "Crowliver")[+ (link-reveal-goto: "Murky Hole", "Set off for fishing")[(set:$destination to "Murky Hole")(set: $difficulty to 1)] ★☆☆☆☆ a muddy lake near Crowliver
++ (link-reveal-goto: "Crowliver Docks", "Set off for fishing")[(set:$destination to "Crowliver Docks")(set: $difficulty to 2)] ★★☆☆☆ the menacing docks at Crowliver
+](if: $location is "Fort Ironscale")[+ (link-reveal-goto: "Sulphurous Springs", "Set off for fishing")[(set:$destination to "Sulphurous Springs")(set: $difficulty to 1)] ★☆☆☆☆ a stinking chemical soup
+](if: $location is "Moonfall Bay")[+ (link-reveal-goto: "Gossamer Lake", "Set off for fishing")[(set:$destination to "Gossamer Lake")(set: $difficulty to 3)] ★★★☆☆ a pure lake in the heart of the city
+]
+
+**Things to see and do**
+<span class="btn">[[Visit the market]]</span>  <span class="btn">[[Travel somewhere else|Pick a destination]]</span>
+<span class="btn">(link-reveal-goto: "Check your inventory", "Check your inventory")[(set: $return to 'Town')]</span>
+
+
+:: Town {"position":"1000,100","size":"100,100"}
+(display: $location)
+
+
+(display: 'Town menu')
+
+
+(display: 'Player stats')
+
+
+:: Set off to town {"position":"700,300","size":"100,100"}
+(if: $destination is $location)[Turns out, you're already at [[$location|Town]].](else:)[(set: $location to $destination)(set: $return to 'Town')You set off for $location. 
+
+(if: (random: 1,2) is 1)[ [[You arrive safely|Town]].](else:)[ [[Something happens along the way|Travelling to town event]].]
+]
+
+
+:: Pick a destination {"position":"1200,100","size":"100,100"}
+**Pick a destination**
+You pore over your maps, trying to decide where to visit next. You are currently at (link-goto: $location, $return). 
+
+
+**Other towns and cities**
+(if: $location is not "Crowliver")[+ (link-reveal-goto: "Crowliver", "Set off to town")[(set:$destination to "Crowliver")], a grubby little human town
+](if: $location is not "Fort Ironscale")[+ (link-reveal-goto: "Fort Ironscale", "Set off to town")[(set:$destination to "Fort Ironscale")], an imposing dwarven coastal fort
+](if: $location is not "Moonfall Bay")[+ (link-reveal-goto: "Moonfall Bay", "Set off to town")[(set:$destination to "Moonfall Bay")], a beautiful but disconcerting elven city
+]
+
+<span class="btn">(link-goto: "Nevermind, I'll stay where I am", $return)</span>
+
+
+:: Murky Hole {"position":"575,1350","size":"100,100"}
+**Murky Hole**
+Despite the less-than-inspiring name, Murky Hole isn't a terrible place to fish, not really. It's a mid-depth lake near Crowliver, situated in a boggy area of outstanding natural mediocrity. No-one would say the fish here are the most attractive specimens, or the most tasty, but they're plentiful and easy to catch.
+
+
+:: Fort Ironscale {"position":"100,1500","size":"200,100"}
+**Fort Ironscale**
+Deafening sounds of clanking metal and huge stinking clouds of sulphur choke the air of Fort Ironscale, but believe it or not, these harsh conditions are just how the local dwarves like it. Ironscale is an old coastal fortification, an imposing bastion of dwarven might, which juts from the side of a sheer cliff into the bubbling chemical-rich seas of the dwarven kingdoms.
+
+
+:: Set off for fishing {"position":"1500,500","size":"100,100"}
+(if: $destination is $location)[Turns out, you're already at [[$location|Fish]].](else:)[(set: $return_to_town to $location)(set: $location to $destination)(set: $return to 'Fish')You set off for $location. 
+
+[[You arrive safely and get ready to fish|Fish]].
+]
+
+
+:: Fish {"position":"1700,500","size":"100,100"}
+(display: $location)
+
+
+(display: 'Fishing menu')
+
+
+(display: 'Player stats')
+
+
+:: Fishing menu {"position":"1500,100","size":"100,100"}
+**Things to see and do**
+<span class="btn">[[Go fishing!|Start fishing]]</span> <span class="btn">(link-reveal-goto: "Return to " + $return_to_town, "Set off to town")[(set:$destination to $return_to_town)]</span>
+
+<span class="btn">(link-reveal-goto: "Check your inventory", "Check your inventory")[(set: $return to 'Fish')]</span>
+
+
+:: Wait... {"position":"1700,300","size":"100,100"}
+(either: "You've been fishing for a while now.", "You sit back and wait for a bite.", "A bird circles overhead.", "Clouds gather on the horizon.", "The wind picks up, creating little flurries on the surface of the water.", "A gentle breeze cools you.", "You wait a while longer.", "You busy yourself checking your line.", "A lovely breeze makes you feel quite contented.")
+
+(set: $fishing_attempts to it + 1)(if: ((random: 0, 6) + $difficulty) <= ($fishing_skill + $pole_skill))[ You feel a bite!
+
+<span class="btn">[[Reel in your catch]]</span>](else:)[<span class="btn">[[(either:"Wait some more", "Keep waiting", "Patience is a virtue", "Wait a while longer", "Adjust your line", "Remain stoic", "Just relax", "Meditate on the nature of fish", "Wait...", "Be patient")|Wait...]]</span> <span class="btn">[[Give up|Fish]]]</span>
+
+
+:: Reel in your catch {"position":"1900,300","size":"100,100"}
+(if: $fishing_attempts > (random: 4, 10))[(goto: 'Failed fishing attempt')]You (either: "expertly", "skillfully", "quickly", "eagerly") reel in your line. 
+
+<span class="btn">[[Check what you've caught|check what you've caught]]</span>
+
+(set: $potential_fish to $location of $fish_stock)
+(set: $catch to $potential_fish's (random: 1, $potential_fish's length))
+
+
+:: check what you've caught {"position":"2100,500","size":"100,100"}
+(display: $catch)(display: 'Output fish'){
+(if: $fish_inventory contains $catch)[
+	(set: $catch of $fish_inventory to it + 1)
+](else:)[
+	(set: $catch of $fish_inventory to 1)
+]
+
+(if: $fish_log contains $catch)[
+	(set: $catch of $fish_log to it + 1)
+](else:)[
+	(set: $catch of $fish_log to 1)
+]
+
+(set: $fish_caught to it + 1)
+(set: $most_recent_catch to $catch)
+(set: $fishing_xp to it + $o_fish_overall)}
+
+(if: $fishing_xp >= ($fishing_skill * 7) and $fishing_skill < 5)[(set: $fishing_skill to it + 1)(set: $fishing_xp to 0)
+**Skill up!**
+You feel like you've got better at fishing.
+
++ Fishing skill: (set: $o_stars to $fishing_skill)(set: $o_star_words to $skill_words)(display: 'Output stars')
++ Total fish caught: $fish_caught
+
+]
+<span class="btn">[[Stash the (lowerfirst: $catch) in your inventory|Durability check]]</span><span class="btn">[[Release it back into the water|Release a fish]]</span>
+
+
+:: Murkeye chub {"position":"950,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Murkeye chub")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 2)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "Makes for a decent enough stew if nothing better is available.")
+}
+
+
+:: Check your inventory {"position":"400,500","size":"100,100"}
+**Your inventory**
+Here's everything you're carrying:
+
+
+**Fish and fish-adjacent**
+(set: $inventory_empty to true)(for: each _item, ...(datanames: $fish_inventory))[(set: $inventory_empty to false)+ (print: _item of $fish_inventory)<small>x</small> (link-reveal-goto: _item, "Fishipedia")[(set: $fishipedia to _item)(set: $fishipedia_type to 'fish')]
+](if: $inventory_empty is true)[(either: "Oh! It looks like there's nothing here.", "Hmm... nothing.", "There's nothing here.", "How embarassing. Empty.")
+] 
+
+**Items and equipment**
+(set: $inventory_empty to true)(for: each _item, ...(datanames: $pole_inventory))[(set: $inventory_empty to false)+ (print: _item of $pole_inventory)<small>x</small> (link-reveal-goto: _item, "Output pole")[(display: _item)] (display: _item)(set: $o_stars to $o_pole_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars') (if: $pole is _item)[ (equipped)]
+](for: each _item, ...(datanames: $item_inventory))[(set: $inventory_empty to false)+ (print: _item of $item_inventory)<small>x</small> (link-reveal-goto: _item, "Fishipedia")[(set: $fishipedia to _item)(set: $fishipedia_type to 'item')](if: $pole is _item)[ (equipped)]
+](if: $inventory_empty is true)[(either: "Oh! It looks like there's nothing here.", "Hmm... nothing.", "There's nothing here.", "How embarassing. Empty.")
+] 
+
+**Currency**
++ $gills<small>x</small> (link-reveal-goto: "golden Gills", "Fishipedia")[(set: $fishipedia to "golden Gills")]
+
+
+<span class="btn">(link-goto: "Okay, I'm done here", $return)</span>
+
+
+:: Fishipedia {"position":"100,1200","size":"200,100"}
+(set: $fishipedia_return to (history:)'s last)(if: $fishipedia is 'Copy of the Fishipedia')[(set: $fishipedia_return to 'Check your inventory')**Fishipedia**
+Fishipedia is a free encyclopedia of fish and fish-related subjects, created and edited by ichthyophiliacs from around the world and published by the Fishimedia Foundation. 
+
+Like any serious fish-lover, naturally you own a copy. As well as being a handy reference book, you also use your copy to keep a record of every fish you catch.
+
+**Your fish log**
+(set: $log_empty to true)(for: each _item, ...(datanames: $fish_log))[(set: $log_empty to false)+ (print: _item of $fish_log)<small>x</small> (link-reveal-goto: _item, "Fishipedia")[(set: $fishipedia to _item)(set: $fishipedia_type to 'fish')]
+](if: $log_empty is true)[(either: "Oh! It looks like there's nothing here.", "Hmm... nothing.", "There's nothing here.", "How embarassing. Empty.")
+]](else:)[You look up the entry for <u>$fishipedia</u> in your copy of the Fishipedia:
+
+
+(display: $fishipedia)(if: $fishipedia_type is 'fish')[(display: 'Output fish')(set: $fishipedia_type to '')(set: $fishipedia to 'Copy of the Fishipedia')]
+]
+<span class="btn">(link-goto: (either: "Okay, I'm done here", "Okay", "Thanks, Fishipedia", "I'm done here", "Close the encyclopedia", "Close the Fishipedia", "Close the book"), $fishipedia_return)</span>
+
+
+:: Sentimental fishing pole {"position":"325,1050","size":"100,100"}
+{
+(set: $o_pole_name to "Sentimental fishing pole")
+(set: $o_pole_skill to 1)
+(set: $o_pole_durability to 0)
+(set: $o_pole_chutzpah to 2)
+(set: $o_pole_overall to (round: ($o_pole_skill + $o_pole_durability + $o_pole_chutzpah) / 3))
+(set: $o_pole_description to "This simple fishing pole is a cherished memento from your childhood, which you used to catch your very first fish. You could never part with it.")
+}
+
+
+:: Player stats {"position":"100,500","size":"100,100"}
+**All about you**
++ Health: (set: $o_stars to $health)(set: $o_star_words to $health_words)(display: 'Output stars')
++ Fishing skill: (set: $o_stars to $fishing_skill)(set: $o_star_words to $skill_words)(display: 'Output stars')
++ Equipped: (link-reveal-goto: $pole, "Output pole")[(display: $pole)] (display: $pole)(set: $o_stars to $o_pole_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
++ Total fish caught: $fish_caught
+(if: $most_recent_catch is not '')[+ Most recent catch: (link-reveal-goto: $most_recent_catch, "Fishipedia")[(set: $fishipedia to $most_recent_catch)(set: $fishipedia_type to 'fish')]
+]
+
+**Options**
+<span class="btn">(link-reveal-goto: "Save your progress", "Save my progress")[(set: $save_game to 'hlfg-default')]</span> <span class="btn">[[Exit to title page|Exit to title - sure]]</span>
+
+
+:: Stuckmud lamprey {"position":"1450,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Stuckmud lamprey")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 3)
+(set: $o_fish_attractiveness to 1)
+(set: $o_fish_description to "Often served up with a thick, viscous jelly made from it's own boiled up secretions. A bit of an acquired taste, to be sure.")
+}
+
+
+:: Travelling to town event {"position":"900,300","size":"100,100"}
+(either: "Along the way, you encounter a travelling salesman. He's got nothing you want, though.", "On route, you are stalked by a wolf. Ultimately, it leaves you alone.", "You spot a really cool-looking rock by the side of the road.")
+
+[[You eventually arrive at $destination|Town]].
+
+
+:: Exit to title - sure {"position":"100,300","size":"100,100"}
+**Are you sure?**
+You'll lose any unsaved progress.
+
+<span class="btn">[[Yes, I quit!|title page]]</span> <span class="btn">(link-goto: ("No thanks, I'll keep playing"), (history:)'s last)</span>
+
+
+:: Old boot {"position":"1075,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Old boot")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 0)
+(set: $o_fish_attractiveness to 0)
+(set: $o_fish_description to "The bane of anglers everywhere, this is a disgusting waterlogged old boot. The laces are completely rotten, and the leather is bloated and peeling away.")
+}
+
+
+:: Sulphurous Springs {"position":"450,1500","size":"100,100"}
+**Sulphurous Springs**
+Dwarven industry produces a lot of poisonous gasses, corrosive fluids and heavy metals, and not a single dwarf cares one whit. These sulphurous springs are the result of centuries of this industrial might seeping into the water table; a series of writhing pools bubbling with chemicals and poisonous metals. Still, nature always finds a way, and there's still fish to be caught from these strange waters.
+
+
+:: lorem ipsum {"position":"250,650","size":"100,100"}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+:: golden Gills {"position":"325,1200","size":"100,100"}
+The golden Gill is the de-facto currency of the land. The fact that it's named after part of a fish is purely coincidental.
+
+It's a small golden coin, roughly 1" in diameter. One side depicts an angry-looking sturgeon. The design on the reverse varies by the issuing kingdom, and usually depicts the ruling monarch, a long-dead politician, or soon-to-be-dead despot.
+
+
+:: Visit the market {"position":"1000,500","size":"100,100"}
+**The Market**
+(display: $location + ' market')
+
+(if: (altered: via its name, ...(passages:)) contains $location + ' pole shop')[
+<span class="btn">[[Go shopping for fishing equipment|Buy fishing poles]]</span>
+
+]
+**Sell your fish and fish-adjacent items**
+(set: $inventory_empty to true)(set: $total to 0)(set: $return to "Visit the market")(for: each _item, ...(datanames: $fish_inventory))[(set: $inventory_empty to false)(set: $multi = $location of $market_adjustment)(set: $sell_value to (num:((_item of $fish_inventory) * (_item of $fish_base_value) * $multi).toFixed(2)))<span class="btn">(link-reveal-goto: "Sell", "Sell specific fish")[(set: $sell_fish to _item)(set: $sell_value to (num:((_item of $fish_inventory) * (_item of $fish_base_value) * $multi).toFixed(2)))]</span> (print: _item of $fish_inventory)<small>x</small> (link-reveal-goto: _item, "Fishipedia")[(set: $fishipedia to _item)] for (print: (_item of $fish_base_value * $multi).toFixed(2))gG ea. = (print: $sell_value.toFixed(2))gG(set: $total to (it + (_item of $fish_inventory) * (_item of $fish_base_value) * $multi)))
+] (if: $inventory_empty is true)[(either: "You haven't got any fish to sell.", "No fish to sell.", "You have no fish to sell.")](else:)[<span class="btn">(link-reveal-goto: "Sell everything for " + $total.toFixed(2) + "gG", "Sell all fish")[(set: $sell_total = $total)]</span>]
+
+
+<span class="btn">[[I'm done here|Town]]</span>
+
+
+:: Ironscale snapper {"position":"700,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Ironscale snapper")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "Tough and crunchy, ironscale snapper is best served after being boiled for at least a week.")
+}
+
+
+:: Sell all fish {"position":"700,600","size":"100,100"}
+You sell all your fish for (print: $sell_total.toFixed(2))gG.(set: $gills to it + $sell_total)(set: $fish_inventory to (dm: ))
+
+You now have (print: $gills.toFixed(2)) golden Gills.
+
+<span class="btn">[[Okay, great|Visit the market]]</span>
+
+
+:: Crowliver market {"position":"325,1350","size":"100,100"}
+Crowliver market is a bustling, writhing affair, rife with pickpockets, cut-throat deals and the occasional genuine cut-throat robbery. In short, it's not a place for the faint of heart, but you're pretty street-smart, eh?
+
+
+:: Fort Ironscale market {"position":"325,1500","size":"100,100"}
+The market square of Fort Ironscale rings with the sound of metal stiking metal as blacksmiths ply their craft. Forges roar and belch forth steam, sparks and rumbling thunder, and in between the sounds of industry shopkeepers bellow their enticements to browse their wares and spend your precious coin.
+
+
+:: Start fishing {"position":"1700,100","size":"100,100"}
+You cast your line.
+
+<span class="btn">[[Wait for a bite|Wait...]]</span>(set: $fishing_attempts to 0)
+
+
+:: equipment statistics {"position":"100,900","size":"100,100"}
+**Equipment statistics**
+Fishing poles have four statistics, each rated out of five stars:
+
+**Quality**
+The quality of the pole (and your personal fishing skill) determines how likely you are to catch a fish using it. 
+
+**Durability**
+A more durable pole is less likely to break. Some particularly large fish require a stronger, more durable pole to land successfully.
+
+**Chutzpah**
+It's a mystery.
+
+**Overall Rating**
+The overall rating of the pole.
+
+
+<span class="btn">(link-goto: (either: "Okay, I'm done here", "Okay", "Thanks!", "I'm done here"), 'Output pole')</a>
+
+
+:: Sell specific fish {"position":"900,700","size":"100,100"}
+You sell your $sell_fish for (print: $sell_value)gG.(set: $gills to it + $sell_value)(move: $fish_inventory's ($sell_fish) into _deleteme)
+
+You now have $gills golden Gills.
+
+<span class="btn">[[Okay, great|Visit the market]]</span>
+
+
+:: Flat bottom mudfish {"position":"325,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Flat bottom mudfish")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 2)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "The way the eyes bulge out on top of an otherwise flat body is grotesquely charming. ")
+}
+
+
+:: Siltfin {"position":"1325,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Siltfin")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 3)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "Long, lithe, and a not-unattractive shade of golden brown, the siltfin is a childhood favourite when served in crispy fried strips. ")
+}
+
+
+:: Caustic jello {"position":"450,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Caustic jello")
+(set: $o_fish_rarity to 2)
+(set: $o_fish_tastiness to 0)
+(set: $o_fish_attractiveness to 1)
+(set: $o_fish_description to "A member of the jellyfish family, this loose blob of acidic amino acids can cause a painful rash, so handle with care. ")
+}
+
+
+:: Flotsam and/or jetsam {"position":"450,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Flotsam and/or jetsam")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 0)
+(set: $o_fish_attractiveness to 0)
+(set: $o_fish_description to "No one knows what this bundle of junk really is, but it's not a fish and it's not valuable.")
+}
+
+
+:: Tangle of weeds {"position":"1575,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Tangle of weeds")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 0)
+(set: $o_fish_description to "Green, pulpy and stringy, the glob of weeds is a pain to detangle. Kinda gross. ")
+}
+
+
+:: Output fish {"position":"100,1800","size":"200,100"}
+**(print: $o_fish_name)**
++ Rarity: (set: $o_stars to $o_fish_rarity)(set: $o_star_words to $fish_rarity_words)(display: 'Output stars')
++ Tastiness: (set: $o_stars to $o_fish_tastiness)(set: $o_star_words to $fish_tastiness_words)(display: 'Output stars')
++ Attractiveness: (set: $o_stars to $o_fish_attractiveness)(set: $o_star_words to $fish_attractiveness_words)(display: 'Output stars')
++ Overall: (set: $o_fish_overall to (round: ($o_fish_rarity + $o_fish_tastiness + $o_fish_attractiveness) / 3))(set: $o_stars to $o_fish_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
+
+(print: $o_fish_description)
+
+
+:: Example fish {"position":"300,2350","size":"100,100"}
+{
+(set: $o_fish_name to "Example fish")
+(set: $o_fish_rarity to 0)
+(set: $o_fish_tastiness to 0)
+(set: $o_fish_attractiveness to 0)
+(set: $o_fish_description to "This is the description.")
+}
+
+
+:: Output stars {"position":"100,650","size":"100,100"}
+(set: $bonus_stars to 0)(set: $unstar to 5 - $o_stars)(if: $o_stars > 5)[(set: $bonus_stars to $o_stars - 5)(set: $o_stars to 5)](if: $o_stars > 0)[(for: each _i, ...(range:1,$o_stars))[★]](if: $unstar > 0)[(for: each _i, ...(range:1,$unstar))[☆] ](if: $bonus_stars > 0)[+(print:$bonus_stars)] ((print: $o_star_words's ($o_stars+1)))
+
+
+:: Save my progress {"position":"250,500","size":"100,100"}
+(if: $save_game is 'hlfg-default-j1')[(set: $save_game to '')(if: (save-game: 'hlfg-default-j1'))[**Game saved!**
+Your progress has been saved.
+](else: )[**Oh no!**
+Sorry, I couldn't save your game to your browser's storage.
+]
+<span class="btn">(link-goto: ("Okay"), (history:)'s last)</span>](else:)[(goto: $return)]
+
+
+:: begin - sure {"position":"400,300","size":"100,100"}
+**Are you sure?**
+You'll lose all your progress in your existing game.
+
+<span class="btn">[[Keep my existing game|title page]]</span> <span class="btn">[[Start a new game|begin]]</span>
+
+
+:: Fish not in pools {"position":"75,2350","size":"200,100"}
+Double-click this passage to edit it.
+
+
+:: Introduction {"position":"700,100","size":"100,100"}
+**An introduction**
+Brief introduction to the setting and some instructions on how to start fishing here... This text only appears on starting a new game and is skipped when resuming a saved game.
+
+(display: 'lorem ipsum')
+
+
+<span class="btn">[[Okay, let's begin|Town]]</span>
+
+
+:: Rainbow dwarfish {"position":"1200,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Rainbow dwarfish")
+(set: $o_fish_rarity to 2)
+(set: $o_fish_tastiness to 2)
+(set: $o_fish_attractiveness to 4)
+(set: $o_fish_description to "Short and stubby with a gorgeous pearlescent sheen, the rainbow dwarfish almost appears to shimmer in the water.")
+}
+
+
+:: Copperpot daggerhead {"position":"700,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Copperpot daggerhead")
+(set: $o_fish_rarity to 2)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "A brute of a fish, all fangs and sharp scales, the daggerhead is much prized for its coppery scales, frequently used in dwarven art.")
+}
+
+
+:: Bronzebucket trout {"position":"325,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Bronzebucket trout")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 3)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "A distinctly average fish, but liked well enough by dwarves and humans alike for a cheap meal.")
+}
+
+
+:: Crowliver Docks {"position":"700,1350","size":"100,100"}
+**Crowliver Docks**
+(display: 'lorem ipsum')
+
+
+:: Release a fish {"position":"1900,700","size":"100,100"}
+{
+(if: $catch of $fish_inventory is 1)[
+	(move: $fish_inventory's ($catch) into _deleteme)
+](else:)[
+	(set: $catch of $fish_inventory to it - 1)
+]
+}(if: $o_fish_attractiveness > 0)[(set: $fishing_karma_xp to it + $o_fish_overall)(if: $fishing_karma_xp >= ($fishing_karma_level * 3) and $fishing_karma_level < 5)[(set: $fishing_karma_level to it + 1)(set: $fishing_karma_xp to 0)**Enlightenment!**
+You feel a surge of mystical kinship with all of fish-kind.
+
+]][[You release the (print: (lowerfirst:$catch)) back into the water|Durability check]].
+
+
+:: Output pole {"position":"100,1050","size":"200,100"}
+**(print: $o_pole_name)**
++ Quality: (set: $o_stars to $o_pole_skill)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
++ Durability: (set: $o_stars to $o_pole_durability)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
++ Chutzpah: (set: $o_stars to $o_pole_chutzpah)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
++ Overall: (set: $o_stars to $o_pole_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
+
+(print: $o_pole_description)
+
+(if: $o_pole_name is in $pole_inventory)[You own (print: $o_pole_name of $pole_inventory) of this item.] (if: $pole is $o_pole_name)[You have this fishing pole equipped.
+]
+<span class="btn">(link-goto: (either: "Okay, I'm done here", "Okay", "Thanks"), $return)</span> <span class="btn">[[What do the stars mean?|equipment statistics]]</span> {(if: $o_pole_name is in $pole_inventory and $o_pole_name is not $pole)[
+<span class="btn">[[Equip this pole]]</span>]}
+
+
+:: Simple wooden fishing pole {"position":"450,1050","size":"100,100"}
+{
+(set: $o_pole_name to "Simple wooden fishing pole")
+(set: $o_pole_skill to 2)
+(set: $o_pole_durability to 0)
+(set: $o_pole_chutzpah to 1)
+(set: $o_pole_overall to (round: ($o_pole_skill + $o_pole_durability + $o_pole_chutzpah) / 3))
+(set: $o_pole_description to "A classic beginner's fishing pole. It'll serve you well until you get truly *hooked* on fishing, but you'll soon want something a bit more impressive.")
+}
+
+
+:: Equip this pole {"position":"225,900","size":"100,100"}
+{
+(set: $pole to $o_pole_name)
+(set: $pole_skill to $o_pole_quality)
+(set: $pole_durability to $p_pole_durability)
+}[[You equip the (print: (lowerfirst:$o_pole_name))|Output pole]].
+
+
+:: Buy fishing poles {"position":"1300,600","size":"100,100"}
+(display: $location + ' pole shop')(set: $return to 'Buy fishing poles')
+
+You have (print: $gills.toFixed(2)) (link-reveal-goto: "golden Gills", "Fishipedia")[(set: $fishipedia to "golden Gills")] available to spend.
+(for: each _item, ...(datanames: $o_pole_stock))[
+(set: $multi = $location of $market_adjustment)(set: $price to (num:((_item of $o_pole_stock) * $multi).toFixed(2)))(if: $gills >= $price)[<span class="btn">(link-reveal-goto: "Buy", "Buy a fishing pole")[(set: $buy_price to $price)(set: $buy_item to _item)]</span>](else:)[<span class="btn-disabled">Too expensive</span>] (link-reveal-goto: _item, "Output pole")[(display: _item)] (display: _item)(set: $o_stars to $o_pole_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars') for (print: $price)Gg (if: $pole_inventory contains _item)[(you own (print: _item of $pole_inventory) already)]]
+
+<span class="btn">[[Return to the market|Visit the market]]</span>
+
+
+:: Crowliver pole shop {"position":"450,1350","size":"100,100"}
+{
+(set: $o_pole_stock to (dm:
+	"Journeyman's rod", 350,
+	'Sturdy wooden fishing pole', 200,
+	'Simple wooden fishing pole', 100,
+))}**Honest Joe's Fishin' Emporium**
+(display: 'lorem ipsum')
+
+
+:: Buy a fishing pole {"position":"1100,700","size":"100,100"}
+You buy a (print: (lowerfirst: $buy_item)) for (print: ($buy_price).toFixed(2))gG.(set: $gills to it - $buy_price)
+
+You now have (print: $gills.toFixed(2)) golden Gills.
+
+<span class="btn">[[Okay, great|Visit the market]]</span>  <span class="btn">(link-reveal-goto: "Check your inventory", "Check your inventory")[(set: $return to 'Buy fishing poles')]</span>
+{
+(if: $pole_inventory contains $buy_item)[
+	(set: $buy_item of $pole_inventory to it + 1)
+](else:)[
+	(set: $buy_item of $pole_inventory to 1)
+]
+}
+
+
+:: Sturdy wooden fishing pole {"position":"575,1050","size":"100,100"}
+{
+(set: $o_pole_name to "Sturdy wooden fishing pole")
+(set: $o_pole_skill to 2)
+(set: $o_pole_durability to 3)
+(set: $o_pole_chutzpah to 1)
+(set: $o_pole_overall to (round: ($o_pole_skill + $o_pole_durability + $o_pole_chutzpah) / 3))
+(set: $o_pole_description to "A classic wooden fishing pole. It's solidly constructed, reliable and no-frills.")
+}
+
+
+:: Journeyman's rod {"position":"700,1050","size":"100,100"}
+{
+(set: $o_pole_name to "Journeyman's rod")
+(set: $o_pole_skill to 3)
+(set: $o_pole_durability to 2)
+(set: $o_pole_chutzpah to 2)
+(set: $o_pole_overall to (round: ($o_pole_skill + $o_pole_durability + $o_pole_chutzpah) / 3))
+(set: $o_pole_description to "A classic wooden fishing pole. It's solidly constructed, reliable and no-frills.")
+}
+
+
+:: Failed fishing attempt {"position":"1700,700","size":"100,100"}
+You (either: "desperately", "feverishly", "eagerly", "frantically") attempt to reel in your catch, but it (either: "wriggles", "breaks", "struggles", "easily breaks", "slips") free!
+
+<span class="btn">[[(either: "Try again", "Never mind", "Oh well", "Oh, no", "Okay, I guess")|Fish]]</span>
+
+
+:: Coy carp {"position":"825,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Coy carp")
+(set: $o_fish_rarity to 2)
+(set: $o_fish_tastiness to 3)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "Elongate with undulating barbles that it uses to shield it's eyes, the coy carp is nervous but curious. Feeding coy carp is a traditional first date for shy teens. Often main course at wedding feasts.")
+}
+
+
+:: Credits {"position":"250,300","size":"100,100"}
+**Happy little fishing game**
++ Writen and coded by (link-reveal: "rumorsmatrix")[(open-url: "https://twitter.com/rumorsmatrix")]. Made with (link-reveal: "Twine")[(open-url: "https://twinery.org")] and love.
++ Fonts are (link-reveal: "Seaweed Script")[(open-url: "https://fonts.google.com/specimen/Seaweed+Script")] and (link-reveal: "Inconsolata")[(open-url: "https://fonts.google.com/specimen/Inconsolata")], via Google Fonts. 
++ Photo by Jon Phillips, via (link-reveal: "Unsplash")[(open-url: "https://unsplash.com/photos/XsPM2CBTTpI")]. </small>
+
+**Community submitted fish**
++ Coy carp, Humble starpike, Kungfufish by (link-reveal: '`@doc_griffiths`')[(open-url: "https://twitter.com/doc_griffiths")]
++ Mirror carp by Blaziken
++ Common muckfish by (link-reveal: '`@clownf1st`')[(open-url: "https://twitter.com/clownf1st")]
+
+Want to have your own fish appear in the game? (link-reveal: "Submit them with this form")[(open-url: "https://docs.google.com/forms/d/e/1FAIpQLScB06nRM11ijrBmlvE4hJguiwguCwEbBLFxhFCYcUmEf15HDw/viewform")]!
+
+<span class="btn">[[Return to the title screen|title page]]</span>
+
+
+:: Humble starpike {"position":"575,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Humble starpike")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 2)
+(set: $o_fish_attractiveness to 4)
+(set: $o_fish_description to "The humble starpike is covered with beautiful shimmering scales, like all members of the starpike family. The &quotl;humble&quot; refers to the lack of fight it puts up when caught by line or net. Best served whole with creamed apple saucy.")
+}
+
+
+:: Kungfufish {"position":"675,2350","size":"100,100"}
+{
+(set: $o_fish_name to "Kungfufish")
+(set: $o_fish_rarity to 4)
+(set: $o_fish_tastiness to 2)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "A torpedo shaped beast of the deep, the kungfufish hunt sharks in shoals. Once their prey is encircled, they take turns to fight based on a complex pecking order. Smoked kungfufish is often served for courage before a dangerous task.")
+}
+
+
+:: Mirror carp {"position":"825,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Mirror carp")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "Named as a it's scales have a slight reflective sheen to them.")
+}
+
+
+:: Common muckfish {"position":"575,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Common muckfish")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "The muckfish is a brassy brown colour, with big vacant eyes and a wide mouth.")
+}
+
+
+:: Moonfall Bay {"position":"100,1650","size":"200,100"}
+**Moonfall Bay**
+You are in the wealthy and stultifying city of Moonfall Bay, an elegant elven city. Huge polished white buildings and gleaming spires dot the skyline, all hung with a delicate silver latice of enchanted wires. The local population is obsessed with protocol and social standing, as an minor infraction is punished most severely. It's hard not to feel a little intimidated and out-of-place.
+
+
+:: Moonfall Bay market {"position":"325,1650","size":"100,100"}
+The market district of Moonfall Bay is beautiful and fragrant, but the goods are eye-wateringly expensive and every transaction requires a delicate pantomime of social cues and codified language.
+
+
+:: Delicate elven rod {"position":"825,1050","size":"100,100"}
+{
+(set: $o_pole_name to "Delicate elven rod")
+(set: $o_pole_skill to 3)
+(set: $o_pole_durability to 2)
+(set: $o_pole_chutzpah to 4)
+(set: $o_pole_overall to (round: ($o_pole_skill + $o_pole_durability + $o_pole_chutzpah) / 3))
+(set: $o_pole_description to "A beautiful rod, finely crafted and expertly adorned with runes picked out in a fine silver script.")
+}
+
+
+:: Moonfall Bay pole shop {"position":"450,1650","size":"100,100"}
+{
+(set: $o_pole_stock to (dm:
+	"Delicate elven rod", 650,
+	"Ocean moonbeam", 900,
+)
+)}**Enchanted Waters**
+The grandest fishing emporium in Moonfall Bay, the Enchanted Waters is part fishing shop, part enchanting workshop. Huge skylights focus the light from the moon overnight, which is funneled into an array of crystals, veined ores and delicately spun twine. Elven magi stride purposefully between arcane altars and workbenches, sacrificing their very lifeblood to create the beautiful artifacts for sale.
+
+
+:: Ocean moonbeam {"position":"950,1050","size":"100,100"}
+{
+(set: $o_pole_name to "Ocean moonbeam")
+(set: $o_pole_skill to 3)
+(set: $o_pole_durability to 3)
+(set: $o_pole_chutzpah to 5)
+(set: $o_pole_overall to (round: ($o_pole_skill + $o_pole_durability + $o_pole_chutzpah) / 3))
+(set: $o_pole_description to "A magical fishing rod created by an intense elven enchanter; it is said to contain a genuine captured moonbeam.")
+}
+
+
+:: Gossamer Lake {"position":"575,1650","size":"100,100"}
+**Gossamer Lake**
+A gorgeous lake in one of the many parks of Moonfall Bay. The water is perfectly clear and tiny motes of crystalised light rise and shimmer from the surface. The locals, however, are not impressed to see you set out your equipment at the bank, and stare at you with strange, deep-black eyes.
+
+
+:: Durability check {"position":"1900,500","size":"100,100"}
+(if: ($pole_durability+1) < (random:0, 5))[(either: "Your fishing pole feels a little unstable in your hands.", "Your fishing pole makes a faint cracking noise.", "Your fishing pole creaks a little.", "Your trusty fishing pole is looking a little worse for the wear.", "Your fishing pole feels a bit off-balance.")
+
+<span class="btn">[[(either: "Worry about it another day", "Oh, well", "Never mind", "Put it out of mind", "I'll make do", "I'll make do for now", "Okay, I guess", "Okay")|Fish]]</span>](else:)[(goto:'Fish')]
+
+
