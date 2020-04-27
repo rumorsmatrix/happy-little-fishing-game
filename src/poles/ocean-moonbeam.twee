@@ -1,0 +1,11 @@
+:: Ocean moonbeam {"position":"950,1050","size":"100,100"}
+{
+(set: $o_pole_name to "Ocean moonbeam")
+(set: $o_pole_skill to 3)
+(set: $o_pole_durability to 3)
+(set: $o_pole_chutzpah to 5)
+(set: $o_pole_overall to (round: ($o_pole_skill + $o_pole_durability + $o_pole_chutzpah) / 3))
+(set: $o_pole_description to "A magical fishing rod created by an intense elven enchanter; it is said to contain a genuine captured moonbeam.")
+}
+
+

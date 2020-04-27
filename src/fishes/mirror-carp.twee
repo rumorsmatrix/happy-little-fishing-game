@@ -1,0 +1,10 @@
+:: Mirror carp {"position":"825,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Mirror carp")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "Named as a it's scales have a slight reflective sheen to them.")
+}
+
+

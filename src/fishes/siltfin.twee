@@ -1,0 +1,10 @@
+:: Siltfin {"position":"1325,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Siltfin")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 3)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "Long, lithe, and a not-unattractive shade of golden brown, the siltfin is a childhood favourite when served in crispy fried strips. ")
+}
+
+

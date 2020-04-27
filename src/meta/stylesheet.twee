@@ -1,0 +1,86 @@
+:: Story Stylesheet [stylesheet]
+@import url('https://fonts.googleapis.com/css?family=Seaweed+Script&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
+
+tw-story {
+	background: #eee url(https://rumorsmatrix.com/hlfg/dust_scratches.png);
+	color: #666 !important;
+  	font-family: "Inconsolata", monospace;
+	font-size: 16px;
+}
+
+tw-sidebar {
+  	display: none;
+}
+
+tw-passage {
+	transition-property: none;
+}
+
+tw-link {
+	color: #00f !important;
+}
+
+tw-link:hover {
+  	color: #00f !important;
+}
+
+strong {
+	font-family: 'Seaweed Script', cursive;
+	font-size: 32px;
+  	color: #222;
+  	font-weight: normal;
+  	word-spacing: 0.3em;
+	line-height: 150%;
+}
+
+.btn tw-link {
+  	border: 1px solid #222;
+ 	border-radius: 4px;
+    color: #444 !important;
+  	background: #fff;
+  	padding: 0.5rem 1rem 0.5rem 1rem;
+  	margin: 0.5rem 1rem 0.5rem 0;
+  	display: inline-block;
+}
+
+.btn tw-link:hover {
+    color: #000 !important;
+    border: 1px solid #000;
+}
+
+.btn-disabled {
+  	border: 1px solid #888;
+ 	border-radius: 4px;
+    color: #666 !important;
+  	background: #d5d5d5;
+  	padding: 0.5rem 1rem 0.5rem 1rem;
+  	margin: 0.5rem 1rem 0.5rem 0;
+  	display: inline-block;
+}
+
+.btn-disabled:hover {
+    border: 1px solid #666;
+}
+
+img {
+  	width: 100%;
+  	border-radius: 4px;
+}
+
+small {
+  color: #888;
+  font-size: 14px !important;
+}
+
+small > tw-hook > tw-link,
+small > tw-hook > tw-link:hover {
+  color: #666 !important;
+}
+
+@media screen and (max-width: 600px) {
+	tw-story {
+		padding: 1rem 1rem 4rem 1rem !important;
+		font-size: 16px;
+	}
+}

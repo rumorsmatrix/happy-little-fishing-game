@@ -1,0 +1,10 @@
+:: Copperpot daggerhead {"position":"700,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Copperpot daggerhead")
+(set: $o_fish_rarity to 2)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "A brute of a fish, all fangs and sharp scales, the daggerhead is much prized for its coppery scales, frequently used in dwarven art.")
+}
+
+

@@ -1,0 +1,10 @@
+:: Kungfufish {"position":"675,2350","size":"100,100"}
+{
+(set: $o_fish_name to "Kungfufish")
+(set: $o_fish_rarity to 4)
+(set: $o_fish_tastiness to 2)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "A torpedo shaped beast of the deep, the kungfufish hunt sharks in shoals. Once their prey is encircled, they take turns to fight based on a complex pecking order. Smoked kungfufish is often served for courage before a dangerous task.")
+}
+
+

@@ -1,0 +1,19 @@
+:: Moonfall Bay {"position":"100,1650","size":"200,100"}
+**Moonfall Bay**
+You are in the wealthy and stultifying city of Moonfall Bay, an elegant elven city. Huge polished white buildings and gleaming spires dot the skyline, all hung with a delicate silver latice of enchanted wires. The local population is obsessed with protocol and social standing, as an minor infraction is punished most severely. It's hard not to feel a little intimidated and out-of-place.
+
+
+:: Moonfall Bay market {"position":"325,1650","size":"100,100"}
+The market district of Moonfall Bay is beautiful and fragrant, but the goods are eye-wateringly expensive and every transaction requires a delicate pantomime of social cues and codified language.
+
+
+:: Moonfall Bay pole shop {"position":"450,1650","size":"100,100"}
+{
+(set: $o_pole_stock to (dm:
+	"Delicate elven rod", 650,
+	"Ocean moonbeam", 900,
+)
+)}**Enchanted Waters**
+The grandest fishing emporium in Moonfall Bay, the Enchanted Waters is part fishing shop, part enchanting workshop. Huge skylights focus the light from the moon overnight, which is funneled into an array of crystals, veined ores and delicately spun twine. Elven magi stride purposefully between arcane altars and workbenches, sacrificing their very lifeblood to create the beautiful artifacts for sale.
+
+

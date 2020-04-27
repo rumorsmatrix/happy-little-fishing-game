@@ -1,0 +1,74 @@
+:: title page {"position":"100,100","size":"100,100"}
+<img src="https://images.unsplash.com/28/stick-and-stones.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80" style=" filter: grayscale(100%); margin-top: -80px;">
+
+**Happy little fishing game**
+This is a game about fish. It's about finding fish, catching fish, selling fish, eating fish, and being friends with fish. I hope it makes you happy. 
+
+(if: (saved-games:) contains "hlfg-default-j1")[<span class="btn">(link-reveal-goto: "Continue existing game", "begin")[(set: $load_game to 'hlfg-default-j1')(set: $save_game to '')]</span>] (if: (saved-games:) contains "hlfg-default-j1")[<span class="btn">[[Start a new game|begin - sure]]</span>](else:)[<span class="btn">[[Start a new game|begin]]</span>]
+
+
+**Features**
++ 16 different fish
++ 7 non-fish items, including 5 fishing poles
++ 4 fishing spots
++ 3 towns
++ 3 rudimentary travelling events
++ Skill level increases
+
+
+**Patch notes**
+<u>26 April 2020</u>: added Moonfall Bay, an elven city, with two new rods for sale and it's own fishing spot; 4 new fish; durability checks.
+
+<u>23 April 2020</u>: added two new fishing poles, a fishing pole shop, the chance for fish to escape while being reeled in, and a fishing log.
+
+
+**Credits**
+Written and coded by (link-reveal: "rumorsmatrix")[(open-url: "https://twitter.com/rumorsmatrix")], with thanks to [[all these wonderful people|Credits]]. Want to have your own fish appear in the game? (link-reveal: "Submit them with this form")[(open-url: "https://docs.google.com/forms/d/e/1FAIpQLScB06nRM11ijrBmlvE4hJguiwguCwEbBLFxhFCYcUmEf15HDw/viewform")]!
+
+Got some feeback? There's (link-reveal: "a r/twinegames thread for that")[(open-url: "https://www.reddit.com/r/twinegames/comments/cq7ump/feedback_requested_on_a_happy_little_fishing_game/")], or (link-reveal: "message me on Twitter")[(open-url: "https://twitter.com/rumorsmatrix")], I'd love to hear from a fellow fisher <3
+
+
+:: Exit to title - sure {"position":"100,300","size":"100,100"}
+**Are you sure?**
+You'll lose any unsaved progress.
+
+<span class="btn">[[Yes, I quit!|title page]]</span> <span class="btn">(link-goto: ("No thanks, I'll keep playing"), (history:)'s last)</span>
+
+
+:: lorem ipsum {"position":"250,650","size":"100,100"}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+:: Output stars {"position":"100,650","size":"100,100"}
+(set: $bonus_stars to 0)(set: $unstar to 5 - $o_stars)(if: $o_stars > 5)[(set: $bonus_stars to $o_stars - 5)(set: $o_stars to 5)](if: $o_stars > 0)[(for: each _i, ...(range:1,$o_stars))[★]](if: $unstar > 0)[(for: each _i, ...(range:1,$unstar))[☆] ](if: $bonus_stars > 0)[+(print:$bonus_stars)] ((print: $o_star_words's ($o_stars+1)))
+
+
+:: Save my progress {"position":"250,500","size":"100,100"}
+(if: $save_game is 'hlfg-default-j1')[(set: $save_game to '')(if: (save-game: 'hlfg-default-j1'))[**Game saved!**
+Your progress has been saved.
+](else: )[**Oh no!**
+Sorry, I couldn't save your game to your browser's storage.
+]
+<span class="btn">(link-goto: ("Okay"), (history:)'s last)</span>](else:)[(goto: $return)]
+
+
+:: begin - sure {"position":"400,300","size":"100,100"}
+**Are you sure?**
+You'll lose all your progress in your existing game.
+
+<span class="btn">[[Keep my existing game|title page]]</span> <span class="btn">[[Start a new game|begin]]</span>
+
+
+:: Introduction {"position":"700,100","size":"100,100"}
+**An introduction**
+Brief introduction to the setting and some instructions on how to start fishing here... This text only appears on starting a new game and is skipped when resuming a saved game.
+
+(display: 'lorem ipsum')
+
+
+<span class="btn">[[Okay, let's begin|Town]]</span>
+
+
+
+
+

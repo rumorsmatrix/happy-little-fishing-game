@@ -1,0 +1,143 @@
+:: begin {"position":"400,100","size":"100,100"}
+{
+(set: $fish_stock to (dm:
+	"Murky Hole",
+		(a: "Old boot",
+			"Murkeye chub",
+			"Stuckmud lamprey",
+			"Common muckfish",
+			"Common muckfish",
+			"Flat bottom mudfish",
+			"Siltfin",
+			"Flotsam and/or jetsam",
+			"Tangle of weeds",
+		),
+	"Crowliver Docks",
+		(a: "Murkeye chub",
+			"Murkeye chub",
+			"Stuckmud lamprey",
+			"Flat bottom mudfish",
+			"Flat bottom mudfish",
+			"Flotsam and/or jetsam",
+		),
+	"Sulphurous Springs",
+		(a: "Ironscale snapper",
+			"Ironscale snapper",
+			"Ironscale snapper",
+			"Caustic jello",
+			"Caustic jello",
+			"Flotsam and/or jetsam",
+			"Flotsam and/or jetsam",
+			"Rainbow dwarfish",
+			"Copperpot daggerhead",
+			"Bronzebucket trout",
+		),
+	"Gossamer Lake",
+		(a: "Coy carp",
+			"Mirror carp",
+			"Humble starpike",
+			"Humble starpike",
+		),
+))
+
+(set: $fish_base_value to (dm:
+	"Old boot", 0.3,
+	"Tangle of weeds", 0.5,
+	"Common muckfish", 0.75,
+	"Murkeye chub", 2,
+	"Stuckmud lamprey", 3,
+	"Ironscale snapper", 2,
+	"Flat bottom mudfish", 3,
+	"Siltfin", 3,
+	"Caustic jello", 2,
+	"Flotsam and/or jetsam", 0.5,
+	"Rainbow dwarfish", 5,
+	"Copperpot daggerhead", 4,
+	"Bronzebucket trout", 3,
+	"Coy carp", 15,
+	"Mirror carp", 12,
+	"Humble starpike", 32,
+))
+
+(set: $fish_rarity_words to (a:
+	'non-existant',
+	'common',
+	'uncommon',
+	'lesser-spotted',
+	'rare',
+	'fabled'))
+(set: $fish_tastiness_words to (a:
+	'inedible',
+	'unpleasant',
+	'passable',
+	'appetizing',
+	'exquisite',
+	'ambrosial'))
+(set: $fish_attractiveness_words to (a:
+	'not even a fish',
+	'offensive',
+	'displeasing',
+	'charming',
+	'beautiful',
+	'transcendent'))
+(set: $fish_overall_words to (a:
+	'terrible',
+	'poor',
+	'adequate',
+	'good',
+	'excellent',
+	'legendary'))
+(set: $health_words to (a:
+	'debilitated',
+	'ailing',
+	'unsound',
+	'healthy',
+	'robust',
+	'flourishing',))
+(set: $skill_words to (a:
+	'unskilled',
+	'hobbyist',
+	'apprentice',
+	'journeyman',
+	'master',
+	'one-with-the-fish',))
+
+
+(set: $market_adjustment to (dm:
+	"Crowliver", 1,
+	"Fort Ironscale", 1.1,
+	"Moonfall Bay", 2.4
+))
+
+
+(set: $health to 3)
+(set: $fishing_skill to 1)
+(set: $fishing_xp to 1)
+(set: $fishing_karma_level to 1)
+(set: $fishing_karma_xp to 1)
+(set: $fish_caught to 0)
+(set: $most_recent_catch to '')
+(set: $fish_log to (dm:))
+
+(set: $location to 'Crowliver')
+(set: $return to 'Town')
+
+(set: $item_inventory to (dm: 'Copy of the Fishipedia', 1, ))
+(set: $pole_inventory to (dm: 'Sentimental fishing pole', 1, ))
+(set: $fish_inventory to (dm:))
+
+(set: $pole to 'Sentimental fishing pole')
+(set: $pole_skill to 1)
+(set: $pole_durability to 1)
+
+(set: $gills to 30)
+}Your adventure is about to begin. First, I just need to get everything set up for you...
+
+(event: when time > 0s)[Fixing snapped lines...]
+(event: when time > 1s)[Polishing fishing rod...]
+(event: when time > 2s)[Brushing fish scales...]
+(event: when time > 3s)[Fluffing clouds...]
+(event: when time > 4s)[Done!
+
+<span class="btn">(if: $load_game is 'hlfg-default-j1')[(load-game: $load_game)(set: $load_game to '')(set: $save_game to '')(link-goto: "Okay", $return)](else:)[(link-goto: "Okay", "Introduction")]</span>]
+

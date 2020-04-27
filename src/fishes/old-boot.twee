@@ -1,0 +1,10 @@
+:: Old boot {"position":"1075,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Old boot")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 0)
+(set: $o_fish_attractiveness to 0)
+(set: $o_fish_description to "The bane of anglers everywhere, this is a disgusting waterlogged old boot. The laces are completely rotten, and the leather is bloated and peeling away.")
+}
+
+

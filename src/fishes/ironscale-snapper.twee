@@ -1,0 +1,10 @@
+:: Ironscale snapper {"position":"700,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Ironscale snapper")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "Tough and crunchy, ironscale snapper is best served after being boiled for at least a week.")
+}
+
+

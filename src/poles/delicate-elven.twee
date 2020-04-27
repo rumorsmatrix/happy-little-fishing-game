@@ -1,0 +1,10 @@
+:: Delicate elven rod {"position":"825,1050","size":"100,100"}
+{
+(set: $o_pole_name to "Delicate elven rod")
+(set: $o_pole_skill to 3)
+(set: $o_pole_durability to 2)
+(set: $o_pole_chutzpah to 4)
+(set: $o_pole_overall to (round: ($o_pole_skill + $o_pole_durability + $o_pole_chutzpah) / 3))
+(set: $o_pole_description to "A beautiful rod, finely crafted and expertly adorned with runes picked out in a fine silver script.")
+}
+

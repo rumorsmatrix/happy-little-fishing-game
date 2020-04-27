@@ -1,0 +1,47 @@
+:: Visit the market {"position":"1000,500","size":"100,100"}
+**The Market**
+(display: $location + ' market')
+
+(if: (altered: via its name, ...(passages:)) contains $location + ' pole shop')[
+<span class="btn">[[Go shopping for fishing equipment|Buy fishing poles]]</span>
+
+]
+**Sell your fish and fish-adjacent items**
+(set: $inventory_empty to true)(set: $total to 0)(set: $return to "Visit the market")(for: each _item, ...(datanames: $fish_inventory))[(set: $inventory_empty to false)(set: $multi = $location of $market_adjustment)(set: $sell_value to (num:((_item of $fish_inventory) * (_item of $fish_base_value) * $multi).toFixed(2)))<span class="btn">(link-reveal-goto: "Sell", "Sell specific fish")[(set: $sell_fish to _item)(set: $sell_value to (num:((_item of $fish_inventory) * (_item of $fish_base_value) * $multi).toFixed(2)))]</span> (print: _item of $fish_inventory)<small>x</small> (link-reveal-goto: _item, "Fishipedia")[(set: $fishipedia to _item)] for (print: (_item of $fish_base_value * $multi).toFixed(2))gG ea. = (print: $sell_value.toFixed(2))gG(set: $total to (it + (_item of $fish_inventory) * (_item of $fish_base_value) * $multi)))
+] (if: $inventory_empty is true)[(either: "You haven't got any fish to sell.", "No fish to sell.", "You have no fish to sell.")](else:)[<span class="btn">(link-reveal-goto: "Sell everything for " + $total.toFixed(2) + "gG", "Sell all fish")[(set: $sell_total = $total)]</span>]
+
+
+<span class="btn">[[I'm done here|Town]]</span>
+
+
+:: Sell all fish {"position":"700,600","size":"100,100"}
+You sell all your fish for (print: $sell_total.toFixed(2))gG.(set: $gills to it + $sell_total)(set: $fish_inventory to (dm: ))
+
+You now have (print: $gills.toFixed(2)) golden Gills.
+
+<span class="btn">[[Okay, great|Visit the market]]</span>
+
+
+:: Sell specific fish {"position":"900,700","size":"100,100"}
+You sell your $sell_fish for (print: $sell_value)gG.(set: $gills to it + $sell_value)(move: $fish_inventory's ($sell_fish) into _deleteme)
+
+You now have $gills golden Gills.
+
+<span class="btn">[[Okay, great|Visit the market]]</span>
+
+
+:: Buy a fishing pole {"position":"1100,700","size":"100,100"}
+You buy a (print: (lowerfirst: $buy_item)) for (print: ($buy_price).toFixed(2))gG.(set: $gills to it - $buy_price)
+
+You now have (print: $gills.toFixed(2)) golden Gills.
+
+<span class="btn">[[Okay, great|Visit the market]]</span>  <span class="btn">(link-reveal-goto: "Check your inventory", "Check your inventory")[(set: $return to 'Buy fishing poles')]</span>
+{
+(if: $pole_inventory contains $buy_item)[
+	(set: $buy_item of $pole_inventory to it + 1)
+](else:)[
+	(set: $buy_item of $pole_inventory to 1)
+]
+}
+
+

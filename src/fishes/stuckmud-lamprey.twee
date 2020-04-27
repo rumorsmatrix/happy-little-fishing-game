@@ -1,0 +1,9 @@
+:: Stuckmud lamprey {"position":"1450,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Stuckmud lamprey")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 3)
+(set: $o_fish_attractiveness to 1)
+(set: $o_fish_description to "Often served up with a thick, viscous jelly made from it's own boiled up secretions. A bit of an acquired taste, to be sure.")
+}
+

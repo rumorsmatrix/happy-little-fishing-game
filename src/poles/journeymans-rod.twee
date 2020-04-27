@@ -1,0 +1,10 @@
+:: Journeyman's rod {"position":"700,1050","size":"100,100"}
+{
+(set: $o_pole_name to "Journeyman's rod")
+(set: $o_pole_skill to 3)
+(set: $o_pole_durability to 2)
+(set: $o_pole_chutzpah to 2)
+(set: $o_pole_overall to (round: ($o_pole_skill + $o_pole_durability + $o_pole_chutzpah) / 3))
+(set: $o_pole_description to "A classic wooden fishing pole. It's solidly constructed, reliable and no-frills.")
+}
+

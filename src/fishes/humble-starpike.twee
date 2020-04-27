@@ -1,0 +1,10 @@
+:: Humble starpike {"position":"575,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Humble starpike")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 2)
+(set: $o_fish_attractiveness to 4)
+(set: $o_fish_description to "The humble starpike is covered with beautiful shimmering scales, like all members of the starpike family. The &quotl;humble&quot; refers to the lack of fight it puts up when caught by line or net. Best served whole with creamed apple saucy.")
+}
+
+

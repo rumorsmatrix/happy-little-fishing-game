@@ -1,0 +1,20 @@
+:: equipment statistics {"position":"100,900","size":"100,100"}
+**Equipment statistics**
+Fishing poles have four statistics, each rated out of five stars:
+
+**Quality**
+The quality of the pole (and your personal fishing skill) determines how likely you are to catch a fish using it.
+
+**Durability**
+A more durable pole is less likely to break. Some particularly large fish require a stronger, more durable pole to land successfully.
+
+**Chutzpah**
+It's a mystery.
+
+**Overall Rating**
+The overall rating of the pole.
+
+
+<span class="btn">(link-goto: (either: "Okay, I'm done here", "Okay", "Thanks!", "I'm done here"), 'Output pole')</a>
+
+

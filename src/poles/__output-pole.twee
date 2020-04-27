@@ -1,0 +1,14 @@
+:: Output pole {"position":"100,1050","size":"200,100"}
+**(print: $o_pole_name)**
++ Quality: (set: $o_stars to $o_pole_skill)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
++ Durability: (set: $o_stars to $o_pole_durability)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
++ Chutzpah: (set: $o_stars to $o_pole_chutzpah)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
++ Overall: (set: $o_stars to $o_pole_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
+
+(print: $o_pole_description)
+
+(if: $o_pole_name is in $pole_inventory)[You own (print: $o_pole_name of $pole_inventory) of this item.] (if: $pole is $o_pole_name)[You have this fishing pole equipped.
+]
+<span class="btn">(link-goto: (either: "Okay, I'm done here", "Okay", "Thanks"), $return)</span> <span class="btn">[[What do the stars mean?|equipment statistics]]</span> {(if: $o_pole_name is in $pole_inventory and $o_pole_name is not $pole)[
+<span class="btn">[[Equip this pole]]</span>]}
+

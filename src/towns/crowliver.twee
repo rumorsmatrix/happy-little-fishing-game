@@ -1,0 +1,19 @@
+:: Crowliver {"position":"100,1350","size":"200,100"}
+**Crowliver**
+You are in the not-so-salubrious port of Crowliver, a human settlement. Half bustling market, half pirate-soaked wharf, Crowliver is a lively if not always law-abiding kind of town.
+
+
+:: Crowliver market {"position":"325,1350","size":"100,100"}
+Crowliver market is a bustling, writhing affair, rife with pickpockets, cut-throat deals and the occasional genuine cut-throat robbery. In short, it's not a place for the faint of heart, but you're pretty street-smart, eh?
+
+
+:: Crowliver pole shop {"position":"450,1350","size":"100,100"}
+{
+(set: $o_pole_stock to (dm:
+	"Journeyman's rod", 350,
+	'Sturdy wooden fishing pole', 200,
+	'Simple wooden fishing pole', 100,
+))}**Honest Joe's Fishin' Emporium**
+(display: 'lorem ipsum')
+
+

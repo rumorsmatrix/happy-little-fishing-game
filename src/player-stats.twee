@@ -1,0 +1,13 @@
+:: Player stats {"position":"100,500","size":"100,100"}
+**All about you**
++ Health: (set: $o_stars to $health)(set: $o_star_words to $health_words)(display: 'Output stars')
++ Fishing skill: (set: $o_stars to $fishing_skill)(set: $o_star_words to $skill_words)(display: 'Output stars')
++ Equipped: (link-reveal-goto: $pole, "Output pole")[(display: $pole)] (display: $pole)(set: $o_stars to $o_pole_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
++ Total fish caught: $fish_caught
+(if: $most_recent_catch is not '')[+ Most recent catch: (link-reveal-goto: $most_recent_catch, "Fishipedia")[(set: $fishipedia to $most_recent_catch)(set: $fishipedia_type to 'fish')]
+]
+
+**Options**
+<span class="btn">(link-reveal-goto: "Save your progress", "Save my progress")[(set: $save_game to 'hlfg-default')]</span> <span class="btn">[[Exit to title page|Exit to title - sure]]</span>
+
+

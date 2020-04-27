@@ -1,0 +1,101 @@
+:: Set off for fishing {"position":"1500,500","size":"100,100"}
+(if: $destination is $location)[Turns out, you're already at [[$location|Fish]].](else:)[(set: $return_to_town to $location)(set: $location to $destination)(set: $return to 'Fish')You set off for $location.
+
+[[You arrive safely and get ready to fish|Fish]].
+]
+
+
+:: Fish {"position":"1700,500","size":"100,100"}
+(display: $location)
+
+
+(display: 'Fishing menu')
+
+
+(display: 'Player stats')
+
+
+:: Fishing menu {"position":"1500,100","size":"100,100"}
+**Things to see and do**
+<span class="btn">[[Go fishing!|Start fishing]]</span> <span class="btn">(link-reveal-goto: "Return to " + $return_to_town, "Set off to town")[(set:$destination to $return_to_town)]</span>
+
+<span class="btn">(link-reveal-goto: "Check your inventory", "Check your inventory")[(set: $return to 'Fish')]</span>
+
+
+:: Wait... {"position":"1700,300","size":"100,100"}
+(either: "You've been fishing for a while now.", "You sit back and wait for a bite.", "A bird circles overhead.", "Clouds gather on the horizon.", "The wind picks up, creating little flurries on the surface of the water.", "A gentle breeze cools you.", "You wait a while longer.", "You busy yourself checking your line.", "A lovely breeze makes you feel quite contented.")
+
+(set: $fishing_attempts to it + 1)(if: ((random: 0, 6) + $difficulty) <= ($fishing_skill + $pole_skill))[ You feel a bite!
+
+<span class="btn">[[Reel in your catch]]</span>](else:)[<span class="btn">[[(either:"Wait some more", "Keep waiting", "Patience is a virtue", "Wait a while longer", "Adjust your line", "Remain stoic", "Just relax", "Meditate on the nature of fish", "Wait...", "Be patient")|Wait...]]</span> <span class="btn">[[Give up|Fish]]]</span>
+
+
+:: Reel in your catch {"position":"1900,300","size":"100,100"}
+(if: $fishing_attempts > (random: 4, 10))[(goto: 'Failed fishing attempt')]You (either: "expertly", "skillfully", "quickly", "eagerly") reel in your line.
+
+<span class="btn">[[Check what you've caught|check what you've caught]]</span>
+
+(set: $potential_fish to $location of $fish_stock)
+(set: $catch to $potential_fish's (random: 1, $potential_fish's length))
+
+
+:: check what you've caught {"position":"2100,500","size":"100,100"}
+(display: $catch)(display: 'Output fish'){
+(if: $fish_inventory contains $catch)[
+	(set: $catch of $fish_inventory to it + 1)
+](else:)[
+	(set: $catch of $fish_inventory to 1)
+]
+
+(if: $fish_log contains $catch)[
+	(set: $catch of $fish_log to it + 1)
+](else:)[
+	(set: $catch of $fish_log to 1)
+]
+
+(set: $fish_caught to it + 1)
+(set: $most_recent_catch to $catch)
+(set: $fishing_xp to it + $o_fish_overall)}
+
+(if: $fishing_xp >= ($fishing_skill * 7) and $fishing_skill < 5)[(set: $fishing_skill to it + 1)(set: $fishing_xp to 0)
+**Skill up!**
+You feel like you've got better at fishing.
+
++ Fishing skill: (set: $o_stars to $fishing_skill)(set: $o_star_words to $skill_words)(display: 'Output stars')
++ Total fish caught: $fish_caught
+
+]
+<span class="btn">[[Stash the (lowerfirst: $catch) in your inventory|Durability check]]</span><span class="btn">[[Release it back into the water|Release a fish]]</span>
+
+
+:: Start fishing {"position":"1700,100","size":"100,100"}
+You cast your line.
+
+<span class="btn">[[Wait for a bite|Wait...]]</span>(set: $fishing_attempts to 0)
+
+
+:: Release a fish {"position":"1900,700","size":"100,100"}
+{
+(if: $catch of $fish_inventory is 1)[
+	(move: $fish_inventory's ($catch) into _deleteme)
+](else:)[
+	(set: $catch of $fish_inventory to it - 1)
+]
+}(if: $o_fish_attractiveness > 0)[(set: $fishing_karma_xp to it + $o_fish_overall)(if: $fishing_karma_xp >= ($fishing_karma_level * 3) and $fishing_karma_level < 5)[(set: $fishing_karma_level to it + 1)(set: $fishing_karma_xp to 0)**Enlightenment!**
+You feel a surge of mystical kinship with all of fish-kind.
+
+]][[You release the (print: (lowerfirst:$catch)) back into the water|Durability check]].
+
+
+:: Failed fishing attempt {"position":"1700,700","size":"100,100"}
+You (either: "desperately", "feverishly", "eagerly", "frantically") attempt to reel in your catch, but it (either: "wriggles", "breaks", "struggles", "easily breaks", "slips") free!
+
+<span class="btn">[[(either: "Try again", "Never mind", "Oh well", "Oh, no", "Okay, I guess")|Fish]]</span>
+
+
+:: Durability check {"position":"1900,500","size":"100,100"}
+(if: ($pole_durability+1) < (random:0, 5))[(either: "Your fishing pole feels a little unstable in your hands.", "Your fishing pole makes a faint cracking noise.", "Your fishing pole creaks a little.", "Your trusty fishing pole is looking a little worse for the wear.", "Your fishing pole feels a bit off-balance.")
+
+<span class="btn">[[(either: "Worry about it another day", "Oh, well", "Never mind", "Put it out of mind", "I'll make do", "I'll make do for now", "Okay, I guess", "Okay")|Fish]]</span>](else:)[(goto:'Fish')]
+
+

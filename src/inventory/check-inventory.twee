@@ -1,0 +1,23 @@
+:: Check your inventory {"position":"400,500","size":"100,100"}
+**Your inventory**
+Here's everything you're carrying:
+
+
+**Fish and fish-adjacent**
+(set: $inventory_empty to true)(for: each _item, ...(datanames: $fish_inventory))[(set: $inventory_empty to false)+ (print: _item of $fish_inventory)<small>x</small> (link-reveal-goto: _item, "Fishipedia")[(set: $fishipedia to _item)(set: $fishipedia_type to 'fish')]
+](if: $inventory_empty is true)[(either: "Oh! It looks like there's nothing here.", "Hmm... nothing.", "There's nothing here.", "How embarassing. Empty.")
+]
+
+**Items and equipment**
+(set: $inventory_empty to true)(for: each _item, ...(datanames: $pole_inventory))[(set: $inventory_empty to false)+ (print: _item of $pole_inventory)<small>x</small> (link-reveal-goto: _item, "Output pole")[(display: _item)] (display: _item)(set: $o_stars to $o_pole_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars') (if: $pole is _item)[ (equipped)]
+](for: each _item, ...(datanames: $item_inventory))[(set: $inventory_empty to false)+ (print: _item of $item_inventory)<small>x</small> (link-reveal-goto: _item, "Fishipedia")[(set: $fishipedia to _item)(set: $fishipedia_type to 'item')](if: $pole is _item)[ (equipped)]
+](if: $inventory_empty is true)[(either: "Oh! It looks like there's nothing here.", "Hmm... nothing.", "There's nothing here.", "How embarassing. Empty.")
+]
+
+**Currency**
++ $gills<small>x</small> (link-reveal-goto: "golden Gills", "Fishipedia")[(set: $fishipedia to "golden Gills")]
+
+
+<span class="btn">(link-goto: "Okay, I'm done here", $return)</span>
+
+

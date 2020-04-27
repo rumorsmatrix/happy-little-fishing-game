@@ -1,0 +1,18 @@
+:: Equip this pole {"position":"225,900","size":"100,100"}
+{
+(set: $pole to $o_pole_name)
+(set: $pole_skill to $o_pole_quality)
+(set: $pole_durability to $p_pole_durability)
+}[[You equip the (print: (lowerfirst:$o_pole_name))|Output pole]].
+
+
+:: Buy fishing poles {"position":"1300,600","size":"100,100"}
+(display: $location + ' pole shop')(set: $return to 'Buy fishing poles')
+
+You have (print: $gills.toFixed(2)) (link-reveal-goto: "golden Gills", "Fishipedia")[(set: $fishipedia to "golden Gills")] available to spend.
+(for: each _item, ...(datanames: $o_pole_stock))[
+(set: $multi = $location of $market_adjustment)(set: $price to (num:((_item of $o_pole_stock) * $multi).toFixed(2)))(if: $gills >= $price)[<span class="btn">(link-reveal-goto: "Buy", "Buy a fishing pole")[(set: $buy_price to $price)(set: $buy_item to _item)]</span>](else:)[<span class="btn-disabled">Too expensive</span>] (link-reveal-goto: _item, "Output pole")[(display: _item)] (display: _item)(set: $o_stars to $o_pole_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars') for (print: $price)Gg (if: $pole_inventory contains _item)[(you own (print: _item of $pole_inventory) already)]]
+
+<span class="btn">[[Return to the market|Visit the market]]</span>
+
+

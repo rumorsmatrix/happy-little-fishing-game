@@ -1,0 +1,9 @@
+:: Murkeye chub {"position":"950,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Murkeye chub")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 2)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "Makes for a decent enough stew if nothing better is available.")
+}
+

@@ -1,0 +1,10 @@
+:: Common muckfish {"position":"575,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Common muckfish")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "The muckfish is a brassy brown colour, with big vacant eyes and a wide mouth.")
+}
+
+

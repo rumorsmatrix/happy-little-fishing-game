@@ -1,0 +1,10 @@
+:: Coy carp {"position":"825,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Coy carp")
+(set: $o_fish_rarity to 2)
+(set: $o_fish_tastiness to 3)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "Elongate with undulating barbles that it uses to shield it's eyes, the coy carp is nervous but curious. Feeding coy carp is a traditional first date for shy teens. Often main course at wedding feasts.")
+}
+
+

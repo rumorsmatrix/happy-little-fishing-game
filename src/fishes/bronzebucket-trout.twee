@@ -1,0 +1,9 @@
+:: Bronzebucket trout {"position":"325,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Bronzebucket trout")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 3)
+(set: $o_fish_attractiveness to 2)
+(set: $o_fish_description to "A distinctly average fish, but liked well enough by dwarves and humans alike for a cheap meal.")
+}
+

@@ -1,0 +1,16 @@
+:: Fishipedia {"position":"100,1200","size":"200,100"}
+(set: $fishipedia_return to (history:)'s last)(if: $fishipedia is 'Copy of the Fishipedia')[(set: $fishipedia_return to 'Check your inventory')**Fishipedia**
+Fishipedia is a free encyclopedia of fish and fish-related subjects, created and edited by ichthyophiliacs from around the world and published by the Fishimedia Foundation.
+
+Like any serious fish-lover, naturally you own a copy. As well as being a handy reference book, you also use your copy to keep a record of every fish you catch.
+
+**Your fish log**
+(set: $log_empty to true)(for: each _item, ...(datanames: $fish_log))[(set: $log_empty to false)+ (print: _item of $fish_log)<small>x</small> (link-reveal-goto: _item, "Fishipedia")[(set: $fishipedia to _item)(set: $fishipedia_type to 'fish')]
+](if: $log_empty is true)[(either: "Oh! It looks like there's nothing here.", "Hmm... nothing.", "There's nothing here.", "How embarassing. Empty.")
+]](else:)[You look up the entry for <u>$fishipedia</u> in your copy of the Fishipedia:
+
+
+(display: $fishipedia)(if: $fishipedia_type is 'fish')[(display: 'Output fish')(set: $fishipedia_type to '')(set: $fishipedia to 'Copy of the Fishipedia')]
+]
+<span class="btn">(link-goto: (either: "Okay, I'm done here", "Okay", "Thanks, Fishipedia", "I'm done here", "Close the encyclopedia", "Close the Fishipedia", "Close the book"), $fishipedia_return)</span>
+

@@ -1,0 +1,10 @@
+:: Caustic jello {"position":"450,1800","size":"100,100"}
+{
+(set: $o_fish_name to "Caustic jello")
+(set: $o_fish_rarity to 2)
+(set: $o_fish_tastiness to 0)
+(set: $o_fish_attractiveness to 1)
+(set: $o_fish_description to "A member of the jellyfish family, this loose blob of acidic amino acids can cause a painful rash, so handle with care. ")
+}
+
+

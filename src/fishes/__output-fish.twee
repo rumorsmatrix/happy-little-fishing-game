@@ -1,0 +1,10 @@
+:: Output fish {"position":"100,1800","size":"200,100"}
+**(print: $o_fish_name)**
++ Rarity: (set: $o_stars to $o_fish_rarity)(set: $o_star_words to $fish_rarity_words)(display: 'Output stars')
++ Tastiness: (set: $o_stars to $o_fish_tastiness)(set: $o_star_words to $fish_tastiness_words)(display: 'Output stars')
++ Attractiveness: (set: $o_stars to $o_fish_attractiveness)(set: $o_star_words to $fish_attractiveness_words)(display: 'Output stars')
++ Overall: (set: $o_fish_overall to (round: ($o_fish_rarity + $o_fish_tastiness + $o_fish_attractiveness) / 3))(set: $o_stars to $o_fish_overall)(set: $o_star_words to $fish_overall_words)(display: 'Output stars')
+
+(print: $o_fish_description)
+
+

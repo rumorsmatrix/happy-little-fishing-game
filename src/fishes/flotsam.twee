@@ -1,0 +1,10 @@
+:: Flotsam and/or jetsam {"position":"450,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Flotsam and/or jetsam")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 0)
+(set: $o_fish_attractiveness to 0)
+(set: $o_fish_description to "No one knows what this bundle of junk really is, but it's not a fish and it's not valuable.")
+}
+
+

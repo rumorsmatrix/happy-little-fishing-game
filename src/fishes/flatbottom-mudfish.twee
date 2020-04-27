@@ -1,0 +1,10 @@
+:: Flat bottom mudfish {"position":"325,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Flat bottom mudfish")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 2)
+(set: $o_fish_attractiveness to 3)
+(set: $o_fish_description to "The way the eyes bulge out on top of an otherwise flat body is grotesquely charming. ")
+}
+
+

@@ -1,0 +1,10 @@
+:: Tangle of weeds {"position":"1575,1925","size":"100,100"}
+{
+(set: $o_fish_name to "Tangle of weeds")
+(set: $o_fish_rarity to 1)
+(set: $o_fish_tastiness to 1)
+(set: $o_fish_attractiveness to 0)
+(set: $o_fish_description to "Green, pulpy and stringy, the glob of weeds is a pain to detangle. Kinda gross. ")
+}
+
+

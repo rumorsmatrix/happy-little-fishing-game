@@ -1,0 +1,52 @@
+:: Town menu {"position":"1200,300","size":"100,100"}
+**Nearby fishing spots**
+Each fishing spot has a recommended skill level, rated out of five stars.
+
+(if: $location is "Crowliver")[+ (link-reveal-goto: "Murky Hole", "Set off for fishing")[(set:$destination to "Murky Hole")(set: $difficulty to 1)] ★☆☆☆☆ a muddy lake near Crowliver
++ (link-reveal-goto: "Crowliver Docks", "Set off for fishing")[(set:$destination to "Crowliver Docks")(set: $difficulty to 2)] ★★☆☆☆ the menacing docks at Crowliver
+](if: $location is "Fort Ironscale")[+ (link-reveal-goto: "Sulphurous Springs", "Set off for fishing")[(set:$destination to "Sulphurous Springs")(set: $difficulty to 1)] ★☆☆☆☆ a stinking chemical soup
+](if: $location is "Moonfall Bay")[+ (link-reveal-goto: "Gossamer Lake", "Set off for fishing")[(set:$destination to "Gossamer Lake")(set: $difficulty to 3)] ★★★☆☆ a pure lake in the heart of the city
+]
+
+**Things to see and do**
+<span class="btn">[[Visit the market]]</span>  <span class="btn">[[Travel somewhere else|Pick a destination]]</span>
+<span class="btn">(link-reveal-goto: "Check your inventory", "Check your inventory")[(set: $return to 'Town')]</span>
+
+
+:: Town {"position":"1000,100","size":"100,100"}
+(display: $location)
+
+
+(display: 'Town menu')
+
+
+(display: 'Player stats')
+
+
+:: Set off to town {"position":"700,300","size":"100,100"}
+(if: $destination is $location)[Turns out, you're already at [[$location|Town]].](else:)[(set: $location to $destination)(set: $return to 'Town')You set off for $location.
+
+(if: (random: 1,2) is 1)[ [[You arrive safely|Town]].](else:)[ [[Something happens along the way|Travelling to town event]].]
+]
+
+
+:: Pick a destination {"position":"1200,100","size":"100,100"}
+**Pick a destination**
+You pore over your maps, trying to decide where to visit next. You are currently at (link-goto: $location, $return).
+
+
+**Other towns and cities**
+(if: $location is not "Crowliver")[+ (link-reveal-goto: "Crowliver", "Set off to town")[(set:$destination to "Crowliver")], a grubby little human town
+](if: $location is not "Fort Ironscale")[+ (link-reveal-goto: "Fort Ironscale", "Set off to town")[(set:$destination to "Fort Ironscale")], an imposing dwarven coastal fort
+](if: $location is not "Moonfall Bay")[+ (link-reveal-goto: "Moonfall Bay", "Set off to town")[(set:$destination to "Moonfall Bay")], a beautiful but disconcerting elven city
+]
+
+<span class="btn">(link-goto: "Nevermind, I'll stay where I am", $return)</span>
+
+
+:: Travelling to town event {"position":"900,300","size":"100,100"}
+(either: "Along the way, you encounter a travelling salesman. He's got nothing you want, though.", "On route, you are stalked by a wolf. Ultimately, it leaves you alone.", "You spot a really cool-looking rock by the side of the road.")
+
+[[You eventually arrive at $destination|Town]].
+
+
